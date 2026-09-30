@@ -9,8 +9,8 @@
 
 // === Constants ===
 const BASE = "https://fsa-crud-2aa9294fe819.herokuapp.com/api";
-const COHORT = "/2608"; // Make sure to change this!
-const RESOURCE = "/artists";
+const COHORT = "/2608";
+const RESOURCE = "/events";
 const API = BASE + COHORT + RESOURCE;
 
 // === State ===
