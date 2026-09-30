@@ -14,30 +14,30 @@ const RESOURCE = "/events";
 const API = BASE + COHORT + RESOURCE;
 
 // === State ===
-let artists = [];
-let selectedArtist;
+let events = [];
+let selectedEvent;
 
 /** Updates state with all artists from the API */
-async function getArtists() {
+async function getEvents() {
   try {
     const response = await fetch(API);
     const result = await response.json();
-    artists = result.data;
+    events = result.data;
     render();
   } catch (error) {
-    alert("Sorry! Can't get Artists");
+    alert("Sorry! We can't get the events");
   }
 }
 
 /** Updates state with a single artist from the API */
-async function getArtist(id) {
+async function getEvent(id) {
   try {
     const response = await fetch(API + "/" + id);
     const result = await response.json();
-    selectedArtist = result.data;
+    selectedEvent = result.data;
     render();
   } catch (error) {
-    alert("Sorry! Can't get Artist");
+    alert("Sorry! Can't get Event");
   }
 }
 
