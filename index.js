@@ -14,69 +14,68 @@ const RESOURCE = "/events";
 const API = BASE + COHORT + RESOURCE;
 
 // === State ===
-let events = [];
-let selectedEvent;
+let parties = [];
+let selectedParty;
 
-async function getEvents() {
+async function getParties() {
   try {
     const response = await fetch(API);
     const result = await response.json();
-    events = result.data;
+    parties = result.data;
     render();
   } catch (error) {
-    alert("Sorry! We can't get the events");
+    console.error(e);
   }
 }
 
-async function getEvent(id) {
+async function getParty(id) {
   try {
     const response = await fetch(API + "/" + id);
     const result = await response.json();
-    selectedEvent = result.data;
+    selectedParty = result.data;
     render();
   } catch (error) {
-    alert("Sorry! Can't get Event");
+    console.error(e);
   }
 }
 
 // === Components ===
 
 /** Artist name that shows more details about the artist when clicked */
-function EventListItem(event) {
+function PartyListItem(party) {
   const $li = document.createElement("li");
   $li.innerHTML = `
-  <a href= "#selected">${event.name}</a>
+  <a href= "#selected">${party.name}</a>
   `;
-  $li.addEventListener("click", () => getEvent(event.id));
+  $li.addEventListener("click", () => getParty(party.id));
   return $li;
 }
 
 /** A list of names of all artists */
-function EventList() {
+function PartyList() {
   const $ul = document.createElement("ul");
   $ul.classList.add("parties");
 
-  const $events = events.map(EventListItem);
-  $ul.replaceChildren(...$events);
+  const $parties = parties.map(PartyListItem);
+  $ul.replaceChildren(...$parties);
   return $ul;
 }
 
 /** Detailed information about the selected artist */
-function EventDetails() {
-  if (!selectedEvent) {
+function PartyDetails() {
+  if (!selectedParty) {
     const $p = document.createElement("p");
-    $p.textContent = "Please select an event to learn more.";
+    $p.textContent = "Please select a party to learn more.";
     return $p;
   }
 
   const $section = document.createElement("section");
   $section.innerHTML = `
 <section class="event">
-  <h3>${selectedEvent.name} #${selectedEvent.id}</h3>
-  <figure>
-    <img alt="${selectedEvent.date}" src="${selectedEvent.location}" />
-  </figure>
-  <p>${selectedArtist.description}</p>
+  <h3>${selectedParty.name} #${selectedParty.id}</h3>
+  <time datetime = "${selectedParty.date}">${selectedParty.date.slice(0, 10)}</time>
+  <address>${selectedParty.location}</address>
+  <p>${selectedParty.description}</p>
 </section>
 `;
 
@@ -91,24 +90,25 @@ function render() {
     <main>
       <section>
         <h2>Upcoming Parties</h2>
-        <EventList></EventList>
+        <PartyList></PartyList>
       </section>
       <section id="selected">
         <h2>Party Details</h2>
-        <EventDetails></EventDetails>
+        <PartyDetails></PartyDetails>
       </section>
     </main>
   `;
-  $app.querySelector("EventList").replaceWith(EventList());
-  $app.querySelector("EventDetails").replaceWith(EventDetails());
+  $app.querySelector("PartyList").replaceWith(PartyList());
+  $app.querySelector("PartyDetails").replaceWith(PartyDetails());
 }
 
+/*
 async function init() {
   await getArtists();
   render();
 }
 
 init();
-
-//render();
-//getArtists();
+*/
+render();
+getParties();
