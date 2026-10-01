@@ -17,7 +17,6 @@ const API = BASE + COHORT + RESOURCE;
 let events = [];
 let selectedEvent;
 
-/** Updates state with all artists from the API */
 async function getEvents() {
   try {
     const response = await fetch(API);
@@ -29,7 +28,6 @@ async function getEvents() {
   }
 }
 
-/** Updates state with a single artist from the API */
 async function getEvent(id) {
   try {
     const response = await fetch(API + "/" + id);
@@ -44,39 +42,39 @@ async function getEvent(id) {
 // === Components ===
 
 /** Artist name that shows more details about the artist when clicked */
-function ArtistListItem(artist) {
+function EventListItem(event) {
   const $li = document.createElement("li");
   $li.innerHTML = `
-  <a href= "#selected">${artist.name}</a>
+  <a href= "#selected">${event.name}</a>
   `;
-  $li.addEventListener("click", () => getArtist(artist.id));
+  $li.addEventListener("click", () => getEvent(event.id));
   return $li;
 }
 
 /** A list of names of all artists */
-function ArtistList() {
+function EventList() {
   const $ul = document.createElement("ul");
   $ul.classList.add("lineup");
 
-  const $artists = artists.map(ArtistListItem);
-  $ul.replaceChildren(...$artists);
+  const $events = events.map(EventListItem);
+  $ul.replaceChildren(...$events);
   return $ul;
 }
 
 /** Detailed information about the selected artist */
-function ArtistDetails() {
-  if (!selectedArtist) {
+function EventDetails() {
+  if (!selectedEvent) {
     const $p = document.createElement("p");
-    $p.textContent = "Please select an artist to learn more.";
+    $p.textContent = "Please select an event to learn more.";
     return $p;
   }
 
   const $section = document.createElement("section");
   $section.innerHTML = `
-<section class="artist">
-  <h3>${selectedArtist.name} #${selectedArtist.id}</h3>
+<section class="event">
+  <h3>${selectedEvent.name} #${selectedEvent.id}</h3>
   <figure>
-    <img alt="${selectedArtist.name}" src="${selectedArtist.imageUrl}" />
+    <img alt="${selectedEvent.date}" src="${selectedEvent.location}" />
   </figure>
   <p>${selectedArtist.description}</p>
 </section>
