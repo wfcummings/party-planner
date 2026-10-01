@@ -54,7 +54,7 @@ function EventListItem(event) {
 /** A list of names of all artists */
 function EventList() {
   const $ul = document.createElement("ul");
-  $ul.classList.add("lineup");
+  $ul.classList.add("parties");
 
   const $events = events.map(EventListItem);
   $ul.replaceChildren(...$events);
@@ -90,17 +90,17 @@ function render() {
     <h1>Fullstack Gala</h1>
     <main>
       <section>
-        <h2>Lineup</h2>
-        <ArtistList></ArtistList>
+        <h2>Upcoming Parties</h2>
+        <EventList></EventList>
       </section>
       <section id="selected">
-        <h2>Artist Details</h2>
-        <ArtistDetails></ArtistDetails>
+        <h2>Party Details</h2>
+        <EventDetails></EventDetails>
       </section>
     </main>
   `;
-  $app.querySelector("ArtistList").replaceWith(ArtistList());
-  $app.querySelector("ArtistDetails").replaceWith(ArtistDetails());
+  $app.querySelector("EventList").replaceWith(EventList());
+  $app.querySelector("EventDetails").replaceWith(EventDetails());
 }
 
 async function init() {
