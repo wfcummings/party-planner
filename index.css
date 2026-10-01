@@ -8,6 +8,9 @@ h1 {
   text-align: center;
   padding: 1rem;
 }
+h2 {
+  padding-bottom: 2ch;
+}
 
 main {
   display: grid;
@@ -39,7 +42,7 @@ section {
   background: #eee;
 }
 
-.event {
+.party {
   display: grid;
   gap: 1ch;
 }
