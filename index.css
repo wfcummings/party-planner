@@ -18,13 +18,13 @@ section {
   padding: 0 1rem;
 }
 
-.lineup {
+.parties {
   list-style: none;
   display: grid;
   gap: 1ch;
 }
 
-.lineup a {
+.parties a {
   color: unset;
   text-decoration: unset;
 
@@ -35,11 +35,11 @@ section {
   padding: 1ch;
 }
 
-.lineup a:hover {
+.parties a:hover {
   background: #eee;
 }
 
-.artist {
+.event {
   display: grid;
   gap: 1ch;
 }
